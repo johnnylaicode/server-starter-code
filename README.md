@@ -1,6 +1,6 @@
 # server-starter-code
 
-This repository is the server starter code for Final Project.
+This repository is the server starter code for Final Project - CRUD Application.
 
 To start:
 
