@@ -1,0 +1,22 @@
+{
+  "name": "starter-server",
+  "version": "1.0.0",
+  "description": "backend for crud app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Your Name Here",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "pg": "^8.5.1",
+    "pgtools": "^0.3.0",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
