@@ -1,66 +1,84 @@
-//import database setup utils
-const createDB = require('./database/utils/createDB');
-const seedDB = require('./database/utils/seedDB');
+/*==================================================
+/app.js
 
-// Instantiate express application
-const express = require("express");
-const app = express();
-
-//our database instance
+This is the top-level (main) file for the server application.
+It is the first file to be called when starting the server application.
+It initiates all required parts of server application such as Express, routes, database, etc.  
+==================================================*/
+/* SET UP DATABASE */
+// Import database setup utilities
+const createDB = require('./database/utils/createDB');  // Import function to create database
+const seedDB = require('./database/utils/seedDB');  // Import function to seed database
+// Import database instance for database connection (including username and password)
 const db = require('./database');
 
-//express router
-const apiRouter = require('./routes/index');
-
-
+/* MODEL SYNCHRONIZATION & DATABASE SEEDING */
+// Set up sync and seed process
 const syncDatabase = async () => {
-  //sync and seed
   try {
+    // Model Synchronization:
+    // - Make a connection between the Node.js application (this server app) and the Postgres database application.
+    // - Create new tables (according to the models) in the Postgres database application, dropping tables first if they already existed
     await db.sync({force: true});
     console.log('------Synced to db--------')
-    await seedDB();
+    // Database Seeding
+    await seedDB();  
     console.log('--------Successfully seeded db--------');
-  } catch (err) {
+  } 
+  catch (err) {
     console.error('syncDB error:', err);
   }  
 }
 
+/* SET UP EXPRESS APPLICATION */
+// Import Express application
+const express = require("express");
+// Create an Express application called "app"
+const app = express();
+
+/* SET UP ROUTES */
+// Import sub-routes and associated router functions
+const apiRouter = require('./routes/index');
+
+/* CONFIGURE EXPRESS APPLICATION */
+// Create a function to configure the Express application
 const configureApp = async () => {
-  // handle request data
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: false }));
+  // Middleware to handle request data and response
+  app.use(express.json());  // Set up Express to parse JSON requests and generate JSON responses
+  app.use(express.urlencoded({ extended: false }));  // Express to parse requests encoded in URL format and querystring
 
-  // Mount apiRouter
-  app.use("/api", apiRouter);
+  // Set up the Express application's main top-level route and attach all sub-routes to it
+  app.use("/api", apiRouter);  // Add main top-level URL path "/api" before sub-routes
 
-  // Handle page not found:
-  // gets triggered when a request is made to
-  // an undefined route 
+  // Handle routing error: Page Not Found
+  // It is triggered when a request is made to an undefined route 
   app.use((req, res, next) => {
     const error = new Error("Not Found, Please Check URL!");
     error.status = 404;
-    next(error);
+    next(error);  // Call Error-Handling Middleware to handle the error
   });
-
-  // Error-handling middleware: 
-  // all express errors get passed to this
-  // when next(error) is called
+  // Routing Error-Handling Middleware:
+  // All Express routes' errors get passed to this when "next(error)" is called
   app.use((err, req, res, next) => {
     console.error(err);
     console.log(req.originalUrl);
     res.status(err.status || 500).send(err.message || "Internal server error.");
   });
-
 };
 
+/* SET UP BOOT FOR SERVER APPLICATION */
+// Construct the boot process by incorporating all needed processes
 const bootApp = async () => {
-  await createDB();
-  await syncDatabase();
-  await configureApp();
+  await createDB();  // Create database (if not exists)
+  await syncDatabase();  // Seed the database
+  await configureApp();  // Start and configure Express application
 };
 
+/* START THE SERVER BOOT */
+// Finally, run the boot precess to start server application
 bootApp();
 
-
-const PORT = 5000;
+/* ACTIVATE THE SERVER PORT */
+// Set up express application to use port 5000 as the access point for the server application.
+const PORT = 5000;  // Server application access point port number
 app.listen(PORT, console.log(`Server started on ${PORT}`));

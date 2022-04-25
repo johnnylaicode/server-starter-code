@@ -1,13 +1,20 @@
+/*==================================================
+/routes/index.js
+
+It defines all the routes used by Express application.
+==================================================*/
+// Import Express module
 const express = require('express');
+// Create an Express router function called "router"
 const router = express.Router();
 
-// Subrouters;
-const studentsRouter = require('./students');
-const campusesRouter = require('./campuses');
+// Sub-Routers ("students" and "campuses")
+const studentsRouter = require('./students');  // Import "students" sub-router functions
+const campusesRouter = require('./campuses');  // Import "campuses" sub-router functions
 
-// Mount our subrouters to assemble our apiRouter;
-router.use('/students', studentsRouter);
-router.use('/campuses', campusesRouter);
+// Set up sub-route's top-level route and attach all sub-routes to it
+router.use('/students', studentsRouter);  // Add top-level URL path "/students" before sub-routes
+router.use('/campuses', campusesRouter);  // Add top-level URL path "/campuses" before sub-routes
 
-// Export our apiRouter, so that it can be used by our main app in app.js;
+// Export sub-routers, so that they can be used by the top-level (main) file app.js
 module.exports = router;
