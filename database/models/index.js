@@ -1,11 +1,15 @@
-// register models, set up associations between tables, and generate barrel file for the models;
+/*==================================================
+/database/database/models/index.js
 
-const Student  = require('./Student');
-const Campus  = require('./Campus');
+It registers models, sets up associations between tables, and generates barrel file for exporting the models.
+==================================================*/
+const Student  = require('./Student');  // Import Student model
+const Campus  = require('./Campus');  // Import Campus model
 
-Student.belongsTo(Campus);  // Student has only one Campus (Student has campus ID as foreign key)
+Student.belongsTo(Campus);  // Student belongs to only one Campus 
 Campus.hasMany(Student);  // Campus can have many Student
 
+// Export models and associations
 module.exports = {
   Student,
   Campus

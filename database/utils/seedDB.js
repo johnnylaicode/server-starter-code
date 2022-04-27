@@ -42,4 +42,5 @@ const seedDB = async () => {
 	await dummy_student2.setCampus(dummy_campus2);
 }
 
+// Export the database seeding function
 module.exports = seedDB;

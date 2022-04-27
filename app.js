@@ -9,7 +9,7 @@ It initiates all required parts of server application such as Express, routes, d
 // Import database setup utilities
 const createDB = require('./database/utils/createDB');  // Import function to create database
 const seedDB = require('./database/utils/seedDB');  // Import function to seed database
-// Import database instance for database connection (including username and password)
+// Import database instance for database connection (including database name, username, and password)
 const db = require('./database');
 
 /* MODEL SYNCHRONIZATION & DATABASE SEEDING */
@@ -75,7 +75,7 @@ const bootApp = async () => {
 };
 
 /* START THE SERVER BOOT */
-// Finally, run the boot precess to start server application
+// Finally, run the boot process to start server application
 bootApp();
 
 /* ACTIVATE THE SERVER PORT */
