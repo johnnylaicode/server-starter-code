@@ -48,13 +48,14 @@ const configureApp = async () => {
   app.use(express.urlencoded({ extended: false }));  // Express to parse requests encoded in URL format and querystring
 
   // Set up the Express application's main top-level route and attach all sub-routes to it
-  app.use("/api", apiRouter);  // Add main top-level URL path "/api" before sub-routes
+  // Add main top-level URL path "/api" before sub-routes
+  app.use("/api", apiRouter);  // URL paths: "/students/", "/students/:id", "/campuses/", and "/campuses/:id"
 
   // Handle routing error: Page Not Found
   // It is triggered when a request is made to an undefined route 
   app.use((req, res, next) => {
     const error = new Error("Not Found, Please Check URL!");
-    error.status = 404;
+    error.status = 404;  // Status code 404 Not Found - resource not found
     next(error);  // Call Error-Handling Middleware to handle the error
   });
   // Routing Error-Handling Middleware:
@@ -62,7 +63,7 @@ const configureApp = async () => {
   app.use((err, req, res, next) => {
     console.error(err);
     console.log(req.originalUrl);
-    res.status(err.status || 500).send(err.message || "Internal server error.");
+    res.status(err.status || 500).send(err.message || "Internal server error.");  // Status code 500 Internal Server Error - server error
   });
 };
 

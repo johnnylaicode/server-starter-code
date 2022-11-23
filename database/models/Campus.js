@@ -1,5 +1,5 @@
 /*==================================================
-/database/database/models/Campus.js
+/database/models/Campus.js
 
 It defines the campus model for the database.
 ==================================================*/

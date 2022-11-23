@@ -13,8 +13,10 @@ const studentsRouter = require('./students');  // Import "students" sub-router f
 const campusesRouter = require('./campuses');  // Import "campuses" sub-router functions
 
 // Set up sub-route's top-level route and attach all sub-routes to it
-router.use('/students', studentsRouter);  // Add top-level URL path "/students" before sub-routes
-router.use('/campuses', campusesRouter);  // Add top-level URL path "/campuses" before sub-routes
+// Add top-level URL path "/students" before sub-routes
+router.use('/students', studentsRouter);  // URL paths: "/students/" and "/students/:id"
+// Add top-level URL path "/campuses" before sub-routes
+router.use('/campuses', campusesRouter);  // URL paths: "/campuses/" and "/campuses/:id"
 
 // Export sub-routers, so that they can be used by the top-level (main) file app.js
 module.exports = router;

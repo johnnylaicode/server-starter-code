@@ -1,5 +1,5 @@
 /*==================================================
-/database/database/models/Student.js
+/database/models/Student.js
 
 It defines the student model for the database.
 ==================================================*/

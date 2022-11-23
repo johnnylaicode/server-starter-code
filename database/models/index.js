@@ -1,5 +1,5 @@
 /*==================================================
-/database/database/models/index.js
+/database/models/index.js
 
 It registers models, sets up associations between tables, and generates barrel file for exporting the models.
 ==================================================*/

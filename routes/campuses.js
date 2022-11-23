@@ -16,7 +16,7 @@ const ash = require('express-async-handler');
 /* GET ALL CAMPUSES: async/await using "try-catch" */
 // router.get('/', async (req, res, next) => {
 //   try {
-//     let students = await Campus.findAll({include: [Student]});
+//     let campuses = await Campus.findAll({include: [Student]});
 //     res.status(200).json(campuses);
 //   } 
 //   catch(err) {
@@ -26,14 +26,15 @@ const ash = require('express-async-handler');
 
 /* GET ALL CAMPUSES */
 router.get('/', ash(async(req, res) => {
-  let campuses = await Campus.findAll({include: [Student]});
-  res.status(200).json(campuses);
+  let campuses = await Campus.findAll({include: [Student]});  // Get all campuses and their associated students
+  res.status(200).json(campuses);  // Status code 200 OK - request succeeded
 }));
 
 /* GET CAMPUS BY ID */
 router.get('/:id', ash(async(req, res) => {
-  let campus = await Campus.findByPk(req.params.id, {include: [Student]});
-  res.status(200).json(campus);
+  // Find campus by Primary Key
+  let campus = await Campus.findByPk(req.params.id, {include: [Student]});  // Get the campus and its associated students
+  res.status(200).json(campus);  // Status code 200 OK - request succeeded
 }));
 
 /* DELETE CAMPUS */
@@ -49,7 +50,7 @@ router.delete('/:id', ash(async(req, res) => {
 /* ADD NEW CAMPUS */
 router.post('/', ash(async(req, res) => {
   let newCampus = await Campus.create(req.body);
-  res.status(200).json(newCampus);
+  res.status(200).json(newCampus);  // Status code 200 OK - request succeeded
 }));
 
 /* EDIT CAMPUS */
@@ -59,8 +60,9 @@ router.put('/:id', ash(async(req, res) => {
       id: req.params.id
     }
   });
-  let campus = await Campus.findByPk(req.params.id, {include: [Student]});
-  res.status(201).json(campus);
+  // Find campus by Primary Key
+  let campus = await Campus.findByPk(req.params.id, {include: [Student]});  // Get the campus and its associated students
+  res.status(201).json(campus);  // Status code 201 Created - successful creation of a resource
 }))
 
 // Export router, so that it can be imported to construct the apiRouter (app.js)

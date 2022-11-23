@@ -29,13 +29,14 @@ const ash = require('express-async-handler');
 // It is the same as using "try-catch" and calling next(error)
 router.get('/', ash(async(req, res) => {
   let students = await Student.findAll({include: [Campus]});
-  res.status(200).json(students);
+  res.status(200).json(students);  // Status code 200 OK - request succeeded
 }));
 
 /* GET STUDENT BY ID */
 router.get('/:id', ash(async(req, res) => {
-  let student = await Student.findByPk(req.params.id, {include: [Campus]});  // Find student by Primary Key
-  res.status(200).json(student);
+  // Find student by Primary Key
+  let student = await Student.findByPk(req.params.id, {include: [Campus]});  // Get the student and its associated campus
+  res.status(200).json(student);  // Status code 200 OK - request succeeded
 }));
 
 /* ADD NEW STUDENT */
@@ -61,8 +62,9 @@ router.put('/:id', ash(async(req, res) => {
   await Student.update(req.body,
         { where: {id: req.params.id} }
   );
+  // Find student by Primary Key
   let student = await Student.findByPk(req.params.id);
-  res.status(201).json(student);
+  res.status(201).json(student);  // Status code 201 Created - successful creation of a resource
 }));
 
 // Export router, so that it can be imported to construct the apiRouter (app.js)
