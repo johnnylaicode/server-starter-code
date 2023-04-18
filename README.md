@@ -23,7 +23,7 @@ This repository is the server (back-end) starter code for Final Project - Full-S
 After creating the starter codebase "final-project-server" repository on GitHub (see above), you can clone it to your local machine. The instructions on how to clone a GitHub repository are available at this [link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
 ----------
-### 3. Set up and run the client (front-end) application on your local machine
+### 3. Set up and run the server (back-end) application on your local machine
 1.	Start a terminal (e.g., Git Bash) on your local machine.
 2.  Go to the "final-project-server" folder, enter the command to install dependencies: `npm install` 
 3.	Start the server application by entering the command: `npm start` 
