@@ -37,7 +37,7 @@ const express = require("express");
 const app = express();
 
 /* SET UP ROUTES */
-// Import sub-routes and associated router functions
+// Import sub-routes and associated router functions for students and campuses
 const apiRouter = require('./routes/index');
 
 /* CONFIGURE EXPRESS APPLICATION */
@@ -49,7 +49,7 @@ const configureApp = async () => {
 
   // Set up the Express application's main top-level route and attach all sub-routes to it
   // Add main top-level URL path "/api" before sub-routes
-  app.use("/api", apiRouter);  // URL paths: "/students/", "/students/:id", "/campuses/", and "/campuses/:id"
+  app.use("/api", apiRouter);  // Updated (complete) URL paths for API: "/api/students/", "/api/students/:id", "/api/campuses/", and "/api/campuses/:id"
 
   // Handle routing error: Page Not Found
   // It is triggered when a request is made to an undefined route 
